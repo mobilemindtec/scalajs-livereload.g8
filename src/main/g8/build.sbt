@@ -15,7 +15,7 @@ val javaSecurerandomVersion = "1.0.0"
 //val jqueryVersion = "2.1"
 
 lazy val root = (project in file("."))
-  .enablePlugins(ScalaJSPlugin, LiveReloadJSPlugin)
+  .enablePlugins(ScalaJSPlugin, LiveReloadJSPlugin, CopyFullJSPlugin)
   .settings(
     name := "$name$",
     dist := Some(baseDirectory.value / "public"),
@@ -30,6 +30,5 @@ lazy val root = (project in file("."))
       //  ExclusionRule(organization = "org.scala-js")
       //),
     ),
-    (artifactPath / compile / fastOptJS) := Attributed.blank(dist.value.get / "assets" / "js" / "main.js"),
-    (artifactPath / compile / fullOptJS) := Attributed.blank(dist.value.get / "assets" / "js" / "main.js")    
+    copyFullTarget := baseDirectory.value / "public" / "assets" / "js" / "main.js"
   )
